@@ -7,6 +7,7 @@ from emails.django import Message
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.template.loader import get_template
+from django.utils import translation
 from django.conf import settings
 from post_office import mail
 
@@ -81,7 +82,9 @@ class MassSendEmails(object):
                 'sender': self.get_mail_from(),
                 'recipients': [e],
             }
+            translation.activate(settings.LANGUAGE_CODE)
             subject, message, html_message = self.get_subject(e), self.get_text(e), self.get_html(e)
+            translation.deactivate()
             if subject:
                 tmp['subject'] = subject
             if message:
