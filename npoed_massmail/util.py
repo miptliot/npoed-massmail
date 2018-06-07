@@ -7,7 +7,7 @@ def get_prefix_and_site():
     return {
         'prefix': getattr(settings, 'URL_PREFIX', 'https'),
         'site': Site.objects.get_current().domain,
-        'PLATFORM_NAME': getattr(settings, 'PLATFORM_NAME', u'Задайте название платформы'),
+        'PLATFORM_NAME': getattr(settings, 'PLATFORM_NAME', 'Задайте название платформы'),
     }
 
 
