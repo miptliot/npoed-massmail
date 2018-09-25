@@ -45,7 +45,7 @@ class MassSendEmails(object):
 
     def get_mail_from(self):
         email = settings.EMAIL_NOTIFICATIONS_FROM
-        if isinstance(email, basestring):
+        if isinstance(email, str):
             return email
         elif isinstance(email, list) or isinstance(email, tuple):
             assert len(email) == 2, 'Email should be tuple of size 2 (name, email)'
