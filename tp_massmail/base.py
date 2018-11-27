@@ -6,6 +6,7 @@ from email.utils import formataddr
 from emails.django import Message
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.http import HttpRequest
 from django.template.loader import get_template
 from django.utils import translation
 from django.conf import settings
@@ -55,17 +56,22 @@ class MassSendEmails(object):
 
     def get_subject(self, email=None):
         if self.template_subject:
-            return get_template(self.template_subject).render(self.get_context(email)).strip().replace('\n', ' ')
+            return get_template(self.template_subject).render(self.get_context(email), request=self.get_request())\
+                .strip().replace('\n', ' ')
         return ''
 
     def get_text(self, email=None):
         if self.template_text:
-            return get_template(self.template_text).render(self.get_context(email))
+            return get_template(self.template_text).render(self.get_context(email), request=self.get_request())
         return None
 
     def get_html(self, email=None):
         if self.template_html:
-            return get_template(self.template_html).render(self.get_context(email))
+            return get_template(self.template_html).render(self.get_context(email), request=self.get_request())
+
+    def get_request(self):
+        if hasattr(self, 'request') and isinstance(self.request, HttpRequest):
+            return self.request
 
     def send(self):
         for msgs in self.generate_messages():
