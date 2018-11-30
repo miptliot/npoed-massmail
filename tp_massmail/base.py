@@ -11,7 +11,7 @@ from django.utils import translation
 from django.conf import settings
 from post_office import mail
 
-from npoed_massmail.util import get_host_url, get_prefix_and_site
+from tp_massmail.util import get_host_url, get_prefix_and_site
 
 
 class NotificationEmail(object):

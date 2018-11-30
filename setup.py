@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='npoed-massmail',
+    name='tp-massmail',
     version='0.1',
     packages=find_packages(),
     description='Mass e-mail utils for PLP and SSO',
-    url='https://github.com/npoed/npoed-massmail',
-    author='NPOED',
-    install_requires=['django>=1.7',
+    url='https://github.com/miptliot/npoed-massmail',
+    author='TP',
+    install_requires=['django>=2',
                       'emails',
                       'django-post-office']
 )
